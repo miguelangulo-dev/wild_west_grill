@@ -1,0 +1,99 @@
+{
+  "moneda": "MXN",
+  "menu": [
+    {
+      "categoria": "Especialidades",
+      "productos": [
+        {
+          "id": "nuestro_pollo",
+          "nombre": "Nuestro Pollo",
+          "variantes": [
+            { "tipo": "Ahumado", "precio": 199 },
+            { "tipo": "Enchiltepinado", "precio": 249 },
+            { "tipo": "BBQ", "precio": 269 }
+          ]
+        },
+        {
+          "id": "costillas_bbq",
+          "nombre": "Costillas BBQ",
+          "precio": 509,
+          "unidad": "Kg"
+        },
+        {
+          "id": "costillas_ahumadas",
+          "nombre": "Costillas Ahumadas",
+          "precio": 439,
+          "unidad": "Kg"
+        },
+        {
+          "id": "molcajete_ahumado",
+          "nombre": "Molcajete Ahumado",
+          "precio": 519
+        },
+        {
+          "id": "costillas_enchiltepinadas",
+          "nombre": "Costillas Enchiltepinadas",
+          "precio": 489,
+          "unidad": "Kg"
+        },
+        {
+          "id": "tocineta",
+          "nombre": "Tocineta",
+          "unidad": "Kg",
+          "variantes": [
+            { "tipo": "Ahumada", "precio": 439 },
+            { "tipo": "Enchiltepinada", "precio": 489 },
+            { "tipo": "BBQ", "precio": 509 }
+          ]
+        },
+        {
+          "id": "arrachera",
+          "nombre": "Arrachera",
+          "unidad": "Kg",
+          "variantes": [
+            { "tipo": "Ahumada", "precio": 509 },
+            { "tipo": "Enchiltepinada", "precio": 559 },
+            { "tipo": "BBQ", "precio": 579 }
+          ]
+        },
+        {
+          "id": "chorizo",
+          "nombre": "Chorizo",
+          "precio": 279,
+          "unidad": "Kg",
+          "descripcion": "Prueba nuestro delicioso chorizo ahumado, que deleitará a tu paladar."
+        }
+      ]
+    },
+    {
+      "categoria": "Guarniciones",
+      "productos": [
+        {
+          "id": "arroz_casa",
+          "nombre": "Arroz de la Casa",
+          "precio": 45,
+          "descripcion": "Delicioso arroz blanco con verduras, listo para degustar con tu especialidad preferida."
+        },
+        {
+          "id": "ensalada",
+          "nombre": "Ensalada",
+          "precio": 45,
+          "descripcion": "Mezcla de vegetales frescos (Jitomate, zanahoria, pepino, lechuga y cebolla) acompañado de nuestro aderezo de la casa."
+        },
+        {
+          "id": "frijolitos_mazatecos",
+          "nombre": "Frijolitos Mazatecos",
+          "precio": 55,
+          "descripcion": "Deliciosos frijolitos acompañados de costilla ahumada y nuestro tradicional chile chiltepín."
+        },
+        {
+          "id": "chistorra",
+          "nombre": "Chistorra",
+          "precio": 329,
+          "unidad": "Kg",
+          "descripcion": "Prueba nuestra deliciosa chistorra ahumada, que deleitará a tu paladar."
+        }
+      ]
+    }
+  ]
+}
