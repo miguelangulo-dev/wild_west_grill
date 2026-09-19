@@ -1,98 +1,57 @@
 {
-  "moneda": "MXN",
   "menu": [
     {
-      "categoria": "Especialidades",
+      "categoria": "costillas",
       "productos": [
-        {
-          "id": "nuestro_pollo",
-          "nombre": "Nuestro Pollo",
-          "variantes": [
-            { "tipo": "Ahumado", "precio": 199 },
-            { "tipo": "Enchiltepinado", "precio": 249 },
-            { "tipo": "BBQ", "precio": 269 }
-          ]
-        },
-        {
-          "id": "costillas_bbq",
-          "nombre": "Costillas BBQ",
-          "precio": 509,
-          "unidad": "Kg"
-        },
-        {
-          "id": "costillas_ahumadas",
-          "nombre": "Costillas Ahumadas",
-          "precio": 439,
-          "unidad": "Kg"
-        },
-        {
-          "id": "molcajete_ahumado",
-          "nombre": "Molcajete Ahumado",
-          "precio": 519
-        },
-        {
-          "id": "costillas_enchiltepinadas",
-          "nombre": "Costillas Enchiltepinadas",
-          "precio": 489,
-          "unidad": "Kg"
-        },
-        {
-          "id": "tocineta",
-          "nombre": "Tocineta",
-          "unidad": "Kg",
-          "variantes": [
-            { "tipo": "Ahumada", "precio": 439 },
-            { "tipo": "Enchiltepinada", "precio": 489 },
-            { "tipo": "BBQ", "precio": 509 }
-          ]
-        },
-        {
-          "id": "arrachera",
-          "nombre": "Arrachera",
-          "unidad": "Kg",
-          "variantes": [
-            { "tipo": "Ahumada", "precio": 509 },
-            { "tipo": "Enchiltepinada", "precio": 559 },
-            { "tipo": "BBQ", "precio": 579 }
-          ]
-        },
-        {
-          "id": "chorizo",
-          "nombre": "Chorizo",
-          "precio": 279,
-          "unidad": "Kg",
-          "descripcion": "Prueba nuestro delicioso chorizo ahumado, que deleitará a tu paladar."
-        }
+        { "id": "costillas_ahumadas", "nombre": "Costillas Ahumadas", "precio": 439, "unidad": "Kg" },
+        { "id": "costillas_enchiltepinadas", "nombre": "Costillas Enchiltepinadas", "precio": 489, "unidad": "Kg" },
+        { "id": "costillas_bbq", "nombre": "Costillas BBQ", "precio": 509, "unidad": "Kg" }
       ]
     },
     {
-      "categoria": "Guarniciones",
+      "categoria": "pollo",
       "productos": [
-        {
-          "id": "arroz_casa",
-          "nombre": "Arroz de la Casa",
-          "precio": 45,
-          "descripcion": "Delicioso arroz blanco con verduras, listo para degustar con tu especialidad preferida."
-        },
-        {
-          "id": "ensalada",
-          "nombre": "Ensalada",
-          "precio": 45,
-          "descripcion": "Mezcla de vegetales frescos (Jitomate, zanahoria, pepino, lechuga y cebolla) acompañado de nuestro aderezo de la casa."
-        },
-        {
-          "id": "frijolitos_mazatecos",
-          "nombre": "Frijolitos Mazatecos",
-          "precio": 55,
-          "descripcion": "Deliciosos frijolitos acompañados de costilla ahumada y nuestro tradicional chile chiltepín."
-        },
-        {
-          "id": "chistorra",
-          "nombre": "Chistorra",
-          "precio": 999,
-          "unidad": "Kg",
-          "descripcion": "Prueba nuestra deliciosa chistorra ahumada, que deleitará a tu paladar."
-        }
+        { "id": "pollo_ahumado", "nombre": "Pollo Ahumado", "precio": 199, "unidad": "Pieza" },
+        { "id": "pollo_enchiltepinado", "nombre": "Pollo Enchiltepinado", "precio": 249, "unidad": "Pieza" },
+        { "id": "pollo_bbq", "nombre": "Pollo BBQ", "precio": 269, "unidad": "Pieza" }
+      ]
+    },
+    {
+      "categoria": "especialidades",
+      "productos": [
+        { "id": "molcajete_ahumado", "nombre": "Molcajete Ahumado", "precio": 519, "unidad": "Pieza" }
+      ]
+    },
+    {
+      "categoria": "arrachera",
+      "productos": [
+        { "id": "arrachera_ahumada", "nombre": "Arrachera Ahumada", "precio": 509, "unidad": "Kg" },
+        { "id": "arrachera_enchiltepinada", "nombre": "Arrachera Enchiltepinada", "precio": 559, "unidad": "Kg" },
+        { "id": "arrachera_bbq", "nombre": "Arrachera BBQ", "precio": 579, "unidad": "Kg" }
+      ]
+    },
+    {
+      "categoria": "chorizos",
+      "productos": [
+        { "id": "chorizo_ahumado", "nombre": "Chorizo Ahumado", "precio": 279, "unidad": "Kg" },
+        { "id": "chistorra_ahumada", "nombre": "Chistorra Ahumada", "precio": 329, "unidad": "Kg" }
+      ]
+    },
+    {
+      "categoria": "tocineta",
+      "productos": [
+        { "id": "tocineta_ahumada", "nombre": "Tocineta Ahumada", "precio": 439, "unidad": "Kg" },
+        { "id": "tocineta_enchiltepinada", "nombre": "Tocineta Enchiltepinada", "precio": 489, "unidad": "Kg" },
+        { "id": "tocineta_bbq", "nombre": "Tocineta BBQ", "precio": 509, "unidad": "Kg" }
+      ]
+    },
+    {
+      "categoria": "guarniciones",
+      "productos": [
+        { "id": "arroz_casa", "nombre": "Arroz de la Casa", "precio": 45, "unidad": "Pieza" },
+        { "id": "frijolitos_mazatecos", "nombre": "Frijolitos Mazatecos", "precio": 55, "unidad": "Pieza" },
+        { "id": "ensalada_fresca", "nombre": "Ensalada Fresca", "precio": 45, "unidad": "Pieza" },
+        { "id": "salsa_cacahuate", "nombre": "Salsa de Cacahuate", "precio": 45, "unidad": "100 ml" }
       ]
     }
   ]
