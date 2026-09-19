@@ -700,7 +700,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -755,33 +754,16 @@
                 }
             });
         }
+const URL_JSON = "https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/precios.json";
 
-        // Cargar precios dinámicamente desde el JSON
-        const URL_JSON = "https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/precios.json";
-
-        async function sincronizarPrecios() {
+async function sincronizarPrecios() {
             try {
                 const respuesta = await fetch(`${URL_JSON}?t=${new Date().getTime()}`);
                 const datos = await respuesta.json();
 
                 datos.menu.forEach(cat => {
                     cat.productos.forEach(prod => {
-                        const titulos = document.querySelectorAll('.product-title');
-                        titulos.forEach(tituloEl => {
-                            if (tituloEl.textContent.trim().toLowerCase() === prod.nombre.trim().toLowerCase()) {
-                                const card = tituloEl.closest('.product-card');
-                                if (card) {
-                                    const precioEl = card.querySelector('.product-price');
-                                    if (precioEl) precioEl.textContent = `$${prod.precio.toFixed(2)}`;
-
-                                    const botones = card.querySelectorAll('.qty-btn');
-                                    if (botones.length === 2) {
-                                        botones[0].setAttribute('onclick', `updateQty('${prod.nombre}', ${prod.precio}, -1)`);
-                                        botones[1].setAttribute('onclick', `updateQty('${prod.nombre}', ${prod.precio}, 1)`);
-                                    }
-                                }
-                            }
-                        });
+                        actualizarTarjeta(prod.nombre, prod.precio);
                     });
                 });
             } catch (error) {
@@ -789,7 +771,26 @@
             }
         }
 
+        function actualizarTarjeta(nombre, precio) {
+            const titulos = document.querySelectorAll('.product-title');
+            titulos.forEach(tituloEl => {
+                if (tituloEl.textContent.trim().toLowerCase() === nombre.trim().toLowerCase()) {
+                    const card = tituloEl.closest('.product-card');
+                    if (card) {
+                        const precioEl = card.querySelector('.product-price');
+                        if (precioEl) precioEl.textContent = `$${precio.toFixed(2)}`;
+
+                        const botones = card.querySelectorAll('.qty-btn');
+                        if (botones.length === 2) {
+                            botones[0].setAttribute('onclick', `updateQty('${nombre}', ${precio}, -1)`);
+                            botones[1].setAttribute('onclick', `updateQty('${nombre}', ${precio}, 1)`);
+                        }
+                    }
+                }
+            });
+        }
         window.addEventListener("DOMContentLoaded", sincronizarPrecios);
+
         // Carrito con Cantidades
         let cart = {};
 
