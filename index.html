@@ -421,6 +421,7 @@
         <button class="cat-btn" onclick="filterCategory('pollo', this)">Pollo</button>
         <button class="cat-btn" onclick="filterCategory('arrachera', this)">Arrachera</button>
         <button class="cat-btn" onclick="filterCategory('chorizos', this)">Chorizos</button>
+        <button class="cat-btn" onclick="filterCategory('tocineta', this)">Tocineta</button>
         <button class="cat-btn" onclick="filterCategory('guarniciones', this)">Guarniciones</button>
     </div>
 
@@ -600,6 +601,49 @@
                 </div>
             </div>
 
+            <!-- TOCINETA -->
+            <div class="product-card" data-category="tocineta">
+                <img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/tocineta1.jpeg" class="product-img" alt="Tocineta Ahumada">
+                <div class="product-info">
+                    <div class="product-title">Tocineta Ahumada</div>
+                    <div class="product-desc">Crujiente tocineta ahumada artesanal por Kg.</div>
+                    <div class="product-price">$439.00</div>
+                    <div class="qty-control">
+                        <button class="qty-btn" onclick="updateQty('Tocineta Ahumada', 439, -1)">-</button>
+                        <span class="qty-val" id="qty-Tocineta Ahumada">0</span>
+                        <button class="qty-btn" onclick="updateQty('Tocineta Ahumada', 439, 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="tocineta">
+                <img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/tocineta2.jpeg" class="product-img" alt="Tocineta Enchiltepinada">
+                <div class="product-info">
+                    <div class="product-title">Tocineta Enchiltepinada</div>
+                    <div class="product-desc">Tocineta bañada en salsa picante especial de chile chiltepín.</div>
+                    <div class="product-price">$489.00</div>
+                    <div class="qty-control">
+                        <button class="qty-btn" onclick="updateQty('Tocineta Enchiltepinada', 489, -1)">-</button>
+                        <span class="qty-val" id="qty-Tocineta Enchiltepinada">0</span>
+                        <button class="qty-btn" onclick="updateQty('Tocineta Enchiltepinada', 489, 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="product-card" data-category="tocineta">
+                <img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/tocineta3.jpeg" class="product-img" alt="Tocineta BBQ">
+                <div class="product-info">
+                    <div class="product-title">Tocineta BBQ</div>
+                    <div class="product-desc">Tocineta glaseada en salsa BBQ ahumada tradicional.</div>
+                    <div class="product-price">$509.00</div>
+                    <div class="qty-control">
+                        <button class="qty-btn" onclick="updateQty('Tocineta BBQ', 509, -1)">-</button>
+                        <span class="qty-val" id="qty-Tocineta BBQ">0</span>
+                        <button class="qty-btn" onclick="updateQty('Tocineta BBQ', 509, 1)">+</button>
+                    </div>
+                </div>
+            </div>
+            
             <!-- GUARNICIONES -->
             <div class="product-card" data-category="guarniciones">
                 <img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/arroz1.jpeg" class="product-img" alt="Arroz de la Casa" onerror="this.src='https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/menu.jpeg'">
@@ -712,6 +756,40 @@
             });
         }
 
+        // Cargar precios dinámicamente desde el JSON
+        const URL_JSON = "https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/precios.json";
+
+        async function sincronizarPrecios() {
+            try {
+                const respuesta = await fetch(`${URL_JSON}?t=${new Date().getTime()}`);
+                const datos = await respuesta.json();
+
+                datos.menu.forEach(cat => {
+                    cat.productos.forEach(prod => {
+                        const titulos = document.querySelectorAll('.product-title');
+                        titulos.forEach(tituloEl => {
+                            if (tituloEl.textContent.trim().toLowerCase() === prod.nombre.trim().toLowerCase()) {
+                                const card = tituloEl.closest('.product-card');
+                                if (card) {
+                                    const precioEl = card.querySelector('.product-price');
+                                    if (precioEl) precioEl.textContent = `$${prod.precio.toFixed(2)}`;
+
+                                    const botones = card.querySelectorAll('.qty-btn');
+                                    if (botones.length === 2) {
+                                        botones[0].setAttribute('onclick', `updateQty('${prod.nombre}', ${prod.precio}, -1)`);
+                                        botones[1].setAttribute('onclick', `updateQty('${prod.nombre}', ${prod.precio}, 1)`);
+                                    }
+                                }
+                            }
+                        });
+                    });
+                });
+            } catch (error) {
+                console.error("Error al sincronizar precios con el JSON:", error);
+            }
+        }
+
+        window.addEventListener("DOMContentLoaded", sincronizarPrecios);
         // Carrito con Cantidades
         let cart = {};
 
