@@ -771,7 +771,8 @@ async function sincronizarPrecios() {
             }
         }
 
-        function actualizarTarjeta(nombre, precio) {
+function actualizarTarjeta(nombre, precio) {
+            // 1. Actualizar las tarjetas del menú principal
             const titulos = document.querySelectorAll('.product-title');
             titulos.forEach(tituloEl => {
                 if (tituloEl.textContent.trim().toLowerCase() === nombre.trim().toLowerCase()) {
@@ -786,6 +787,18 @@ async function sincronizarPrecios() {
                             botones[1].setAttribute('onclick', `updateQty('${nombre}', ${precio}, 1)`);
                         }
                     }
+                }
+            });
+
+            // 2. NUEVO: Actualizar también los precios en el carrusel
+            const captions = document.querySelectorAll('.carousel-caption');
+            captions.forEach(caption => {
+                // Revisar si el texto del carrusel contiene el nombre del producto que viene del JSON
+                if (caption.textContent.toLowerCase().includes(nombre.toLowerCase())) {
+                    // Extraer el texto base (ej. "🍗 Pollo Ahumado") y quitarle cualquier precio viejo
+                    let textoBase = caption.textContent.split('—')[0].trim();
+                    // Inyectarle el nuevo precio dinámico
+                    caption.textContent = `${textoBase} — $${precio.toFixed(2)}`;
                 }
             });
         }
