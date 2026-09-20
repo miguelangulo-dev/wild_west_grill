@@ -42,7 +42,7 @@
       "productos": [
         { "id": "tocineta_ahumada", "nombre": "Tocineta Ahumada", "precio": 439, "unidad": "Kg" },
         { "id": "tocineta_enchiltepinada", "nombre": "Tocineta Enchiltepinada", "precio": 489, "unidad": "Kg" },
-        { "id": "tocineta_bbq", "nombre": "Tocineta BBQ", "precio": 999, "unidad": "Kg" }
+        { "id": "tocineta_bbq", "nombre": "Tocineta BBQ", "precio": 509, "unidad": "Kg" }
       ]
     },
     {
