@@ -789,18 +789,6 @@ function actualizarTarjeta(nombre, precio) {
                     }
                 }
             });
-
-            // 2. NUEVO: Actualizar también los precios en el carrusel
-            const captions = document.querySelectorAll('.carousel-caption');
-            captions.forEach(caption => {
-                // Revisar si el texto del carrusel contiene el nombre del producto que viene del JSON
-                if (caption.textContent.toLowerCase().includes(nombre.toLowerCase())) {
-                    // Extraer el texto base (ej. "🍗 Pollo Ahumado") y quitarle cualquier precio viejo
-                    let textoBase = caption.textContent.split('—')[0].trim();
-                    // Inyectarle el nuevo precio dinámico
-                    caption.textContent = `${textoBase} — $${precio.toFixed(2)}`;
-                }
-            });
         }
         window.addEventListener("DOMContentLoaded", sincronizarPrecios);
 
