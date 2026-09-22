@@ -2,18 +2,17 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Wild West Grill</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wild West Grill - Menú</title>
     <style>
         :root {
-            --bg-color: #12100E;
-            --card-bg: #1E1B18;
-            --primary: #D35400;
-            --accent: #F2B705;
-            --text-main: #F5EBE0;
-            --text-muted: #A0958A;
-            --border: #332B25;
-            --danger: #C0392B;
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --text-main: #f0f0f0;
+            --text-muted: #aaaaaa;
+            --accent: #ff9800;
+            --accent-hover: #e68900;
+            --danger: #e53935;
         }
 
         * {
@@ -21,184 +20,165 @@
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
-            padding-bottom: 90px;
+            padding-bottom: 90px; /* Espacio para la barra fija del carrito */
         }
 
-        /* CABECERA CON LOGO */
-        header {
-            background-color: #1A1410;
+        /* HEADER Y CARRUSEL */
+        .header-container {
             text-align: center;
-            padding: 15px;
-            border-bottom: 3px solid var(--accent);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
+            padding: 20px 10px;
+            background: #181818;
+            border-bottom: 2px solid var(--accent);
         }
 
-        .header-logo {
-            max-width: 130px;
-            height: auto;
-            border-radius: 8px;
-        }
-
-        header h1 {
+        .header-container h1 {
             color: var(--accent);
-            font-size: 1.5rem;
-            letter-spacing: 1px;
+            font-size: 1.8rem;
+            margin-bottom: 5px;
         }
 
-        .tagline {
-            color: var(--text-main);
-            font-size: 0.8rem;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
+        .header-container p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
         }
 
-        /* CARRUSEL DE PROMOCIONES */
-        .carousel-container {
-            position: relative;
-            margin: 15px;
-            border-radius: 12px;
+        .carousel {
+            width: 100%;
+            height: 200px;
             overflow: hidden;
-            border: 2px solid var(--primary);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-            background-color: #0A0806;
+            position: relative;
+            background: #000;
         }
 
-        .carousel-slide {
+        .carousel-track {
             display: flex;
+            width: 300%;
+            height: 100%;
             transition: transform 0.5s ease-in-out;
         }
 
-        .carousel-item {
-            min-width: 100%;
-            position: relative;
+        .carousel-slide {
+            width: 33.333%;
+            height: 100%;
+            flex-shrink: 0;
         }
 
-        .carousel-item img {
+        .carousel-slide img {
             width: 100%;
-            height: 210px;
-            object-fit: contain;
-            display: block;
+            height: 100%;
+            object-fit: cover;
         }
 
-        .carousel-caption {
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            color: var(--accent);
-            text-align: center;
-            padding: 6px;
-            font-weight: bold;
-            font-size: 0.85rem;
-        }
-
-        /* BOTONES DE FILTRO */
+        /* CATEGORÍAS / FILTROS */
         .categories-nav {
             display: flex;
             overflow-x: auto;
-            padding: 10px 15px;
-            gap: 8px;
-            scrollbar-width: none;
+            gap: 10px;
+            padding: 15px;
+            background: #181818;
+            white-space: nowrap;
+            scrollbar-width: none; /* Firefox */
         }
 
         .categories-nav::-webkit-scrollbar {
-            display: none;
+            display: none; /* Chrome/Safari */
         }
 
         .cat-btn {
-            background-color: var(--card-bg);
+            background: #2a2a2a;
             color: var(--text-main);
-            border: 1px solid var(--border);
-            padding: 8px 14px;
+            border: none;
+            padding: 8px 16px;
             border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            white-space: nowrap;
+            font-size: 0.9rem;
             cursor: pointer;
+            transition: background 0.3s;
         }
 
-        .cat-btn.active {
-            background-color: var(--primary);
-            color: #FFF;
-            border-color: var(--accent);
+        .cat-btn.active, .cat-btn:hover {
+            background: var(--accent);
+            color: #121212;
+            font-weight: bold;
         }
 
-        /* MENÚ DE PRODUCTOS */
-        .menu-section {
+        /* CONTENEDOR DE PRODUCTOS */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 15px;
         }
 
         .menu-grid {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
         }
 
         .product-card {
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            border: 1px solid var(--border);
-            padding: 10px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
             display: flex;
-            gap: 12px;
-            align-items: center;
+            flex-direction: column;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            border: 1px solid #2a2a2a;
         }
 
         .product-img {
-            width: 85px;
-            height: 85px;
-            border-radius: 8px;
+            width: 100%;
+            height: 180px;
             object-fit: cover;
         }
 
         .product-info {
-            flex: 1;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
         }
 
         .product-title {
-            font-size: 1rem;
-            color: #FFF;
+            font-size: 1.1rem;
             font-weight: bold;
-            margin-bottom: 3px;
+            margin-bottom: 5px;
+            color: var(--text-main);
         }
 
         .product-desc {
-            font-size: 0.75rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
-            margin-bottom: 6px;
-            line-height: 1.2;
+            margin-bottom: 12px;
+            flex-grow: 1;
         }
 
         .product-price {
-            color: var(--accent);
+            font-size: 1.15rem;
             font-weight: bold;
-            font-size: 0.95rem;
+            color: var(--accent);
+            margin-bottom: 12px;
         }
 
-        /* CONTROLES DE CANTIDAD EN CADA PLATILLO */
+        /* CONTROL DE CANTIDADES */
         .qty-control {
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin-top: 6px;
+            justify-content: space-between;
+            background: #2a2a2a;
+            border-radius: 8px;
+            padding: 4px;
         }
 
         .qty-btn {
-            background-color: var(--primary);
-            color: white;
+            background: var(--accent);
+            color: #121212;
             border: none;
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            height: 32px;
             border-radius: 6px;
             font-weight: bold;
             font-size: 1.1rem;
@@ -206,71 +186,68 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: background 0.2s;
         }
 
         .qty-btn:active {
-            transform: scale(0.92);
+            background: var(--accent-hover);
         }
 
         .qty-val {
             font-weight: bold;
-            font-size: 0.95rem;
-            color: var(--accent);
-            min-width: 26px;
-            text-align: center;
-            background: #12100E;
-            padding: 3px 6px;
-            border-radius: 4px;
-            border: 1px solid var(--border);
+            font-size: 1rem;
+            padding: 0 10px;
         }
 
-        /* BARRA DEL CARRITO */
+        /* BARRA DEL CARRITO FIJA */
         .cart-bar {
             position: fixed;
             bottom: 0;
             left: 0;
-            right: 0;
-            background-color: #1A1410;
+            width: 100%;
+            background: #181818;
             border-top: 2px solid var(--accent);
-            padding: 10px 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 -4px 15px rgba(0,0,0,0.8);
-            z-index: 100;
+            padding: 12px 20px;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.5);
+            z-index: 1000;
         }
 
         .cart-info {
-            font-size: 0.9rem;
+            font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
         }
 
         .cart-actions {
             display: flex;
-            gap: 8px;
+            gap: 10px;
         }
 
-        .view-cart-btn {
-            background-color: var(--card-bg);
-            color: var(--accent);
-            border: 1px solid var(--accent);
-            padding: 8px 12px;
+        .view-cart-btn, .cart-btn {
+            background: #2a2a2a;
+            color: var(--text-main);
+            border: none;
+            padding: 10px 15px;
             border-radius: 8px;
             font-weight: bold;
-            font-size: 0.85rem;
             cursor: pointer;
+            font-size: 0.9rem;
         }
 
         .cart-btn {
-            background-color: #27AE60;
-            color: white;
-            border: none;
-            padding: 8px 14px;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 0.85rem;
-            cursor: pointer;
+            background: #25D366; /* Color WhatsApp */
+            color: #fff;
+        }
+
+        .view-cart-btn:hover {
+            background: #3a3a3a;
+        }
+
+        .cart-btn:hover {
+            background: #20ba5a;
         }
 
         /* MODAL DEL CARRITO */
@@ -278,44 +255,54 @@
             position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.85);
-            display: none;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
             justify-content: center;
             align-items: flex-end;
-            z-index: 200;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 2000;
         }
 
         .modal-overlay.active {
-            display: flex;
+            opacity: 1;
+            pointer-events: auto;
         }
 
         .modal-content {
-            background-color: var(--card-bg);
+            background: var(--card-bg);
             width: 100%;
-            max-width: 500px;
-            border-radius: 16px 16px 0 0;
-            border-top: 3px solid var(--accent);
-            padding: 20px;
+            max-width: 600px;
             max-height: 80vh;
-            overflow-y: auto;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            padding: 20px;
+            box-shadow: 0 -10px 25px rgba(0,0,0,0.5);
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
         }
 
         .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 10px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 12px;
+            margin-bottom: 15px;
         }
 
         .modal-header h2 {
+            font-size: 1.3rem;
             color: var(--accent);
-            font-size: 1.2rem;
         }
 
         .close-btn {
@@ -327,35 +314,37 @@
         }
 
         .cart-items-list {
+            overflow-y: auto;
+            flex-grow: 1;
+            margin-bottom: 15px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
 
         .cart-item-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: var(--bg-color);
+            background: #252525;
             padding: 10px;
             border-radius: 8px;
-            border: 1px solid var(--border);
         }
 
         .cart-item-info {
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            gap: 3px;
         }
 
         .cart-item-name {
             font-weight: bold;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
 
         .cart-item-price {
-            color: var(--accent);
             font-size: 0.85rem;
+            color: var(--text-muted);
         }
 
         .cart-item-actions {
@@ -365,345 +354,62 @@
         }
 
         .delete-btn {
-            background-color: var(--danger);
-            color: white;
+            background: var(--danger);
             border: none;
+            color: white;
             padding: 6px 10px;
             border-radius: 6px;
             cursor: pointer;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
         }
 
         .clear-cart-btn {
-            background-color: var(--danger);
-            color: white;
-            border: none;
+            background: transparent;
+            border: 1px solid var(--danger);
+            color: var(--danger);
             padding: 10px;
             border-radius: 8px;
             font-weight: bold;
             cursor: pointer;
-            width: 100%;
             text-align: center;
+            transition: background 0.2s;
+        }
+
+        .clear-cart-btn:hover {
+            background: rgba(229, 57, 53, 0.1);
         }
     </style>
 </head>
 <body>
 
-    <!-- CABECERA CON LOGO -->
-    <header>
-        <img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/logo1.jpeg" alt="Logo Wild West Grill" class="header-logo" onerror="this.src='https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/menu.jpeg'">
-        <h1>WILD WEST GRILL</h1>
-        <div class="tagline">Smoked Chicken & Ribs</div>
-    </header>
-
-<!-- CARRUSEL DE IMAGENES -->
-<div class="carousel-container">
-    <div class="carousel-slide" id="carouselSlide">
-        <div class="carousel-item">
-            <img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/costillas1.jpeg" alt="Costillas Ahumadas" onerror="this.src='https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/menu.jpeg'">
-            <div class="carousel-caption">🍖 Costillas Ahumadas</div>
-        </div>
-        <div class="carousel-item">
-            <img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/costillas2.jpeg" alt="Especialidades" onerror="this.src='https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/menu.jpeg'">
-            <div class="carousel-caption">🔥 Especialidades</div>
-        </div>
-        <div class="carousel-item">
-            <img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/costillas3.jpeg" alt="Paquetes" onerror="this.src='https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/menu.jpeg'">
-            <div class="carousel-caption">🍗 Paquetes y Pollos</div>
-        </div>
-    </div>
-</div>
-
-    <!-- BOTONES DE NAVEGACIÓN -->
-    <div class="categories-nav">
-        <button class="cat-btn active" onclick="filterCategory('todos', this)">Todos</button>
-        <button class="cat-btn" onclick="filterCategory('costillas', this)">Costillas</button>
-        <button class="cat-btn" onclick="filterCategory('pollo', this)">Pollo</button>
-        <button class="cat-btn" onclick="filterCategory('arrachera', this)">Arrachera</button>
-        <button class="cat-btn" onclick="filterCategory('chorizos', this)">Chorizos</button>
-        <button class="cat-btn" onclick="filterCategory('tocineta', this)">Tocineta</button>
-        <button class="cat-btn" onclick="filterCategory('guarniciones', this)">Guarniciones</button>
+    <!-- CABECERA Y CARRUSEL -->
+    <div class="header-container">
+        <h1>Wild West Grill</h1>
+        <p>Cortes ahumados y especialidades al estilo oeste</p>
     </div>
 
-    <!-- PRODUCTOS -->
-    <div class="menu-section">
-        <div class="menu-grid">
-
-            <!-- COSTILLAS -->
-            <div class="product-card" data-category="costillas">
-                <img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/costillas1.jpeg" class="product-img" alt="Costillas Ahumadas" onerror="this.src='https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/menu.jpeg'">
-                <div class="product-info">
-                    <div class="product-title">Costillas Ahumadas</div>
-                    <div class="product-desc">Acompañadas de tortillas a mano, salsa, chiles toreados, nopalitos y pepinos.</div>
-                    <div class="product-price">$359.00</div>
-                    <div class="qty-control">
-                        <button class="qty-btn" onclick="updateQty('Costillas Ahumadas', 359, -1)">-</button>
-                        <span class="qty-val" id="qty-Costillas Ahumadas">0</span>
-                        <button class="qty-btn" onclick="updateQty('Costillas Ahumadas', 359, 1)">+</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="product-card" data-category="costillas">
-                <img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/costillas2.jpeg" class="product-img" alt="Costillas Enchiltepinadas" onerror="this.src='https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/menu.jpeg'">
-                <div class="product-info">
-                    <div class="product-title">Costillas Enchiltepinadas</div>
-                    <div class="product-desc">Bañadas en salsa especial de chile chiltepín con guarnición completa.</div>
-                    <div class="product-price">$409.00</div>
-                    <div class="qty-control">
-                        <button class="qty-btn" onclick="updateQty('Costillas Enchiltepinadas', 409, -1)">-</button>
-                        <span class="qty-val" id="qty-Costillas Enchiltepinadas">0</span>
-                        <button class="qty-btn" onclick="updateQty('Costillas Enchiltepinadas', 409, 1)">+</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="product-card" data-category="costillas">
-                <img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/costillas3.jpeg" class="product-img" alt="Costillas BBQ" onerror="this.src='https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/menu.jpeg'">
-                <div class="product-info">
-                    <div class="product-title">Costillas BBQ</div>
-                    <div class="product-desc">Con salsa BBQ ahumada tradicional de la casa y guarnición completa.</div>
-                    <div class="product-price">$419.00</div>
-                    <div class="qty-control">
-                        <button class="qty-btn" onclick="updateQty('Costillas BBQ', 419, -1)">-</button>
-                        <span class="qty-val" id="qty-Costillas BBQ">0</span>
-                        <button class="qty-btn" onclick="updateQty('Costillas BBQ', 419, 1)">+</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- POLLO -->
-            <div class="product-card" data-category="pollo">
-                <img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/pollo1.jpeg" class="product-img" alt="Pollo Ahumado" onerror="this.src='https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/menu.jpeg'">
-                <div class="product-info">
-                    <div class="product-title">Pollo Ahumado</div>
-                    <div class="product-desc">Pollo entero ahumado a fuego lento con su sazón artesanal.</div>
-                    <div class="product-price">$189.00</div>
-                    <div class="qty-control">
-                        <button class="qty-btn" onclick="updateQty('Pollo Ahumado', 189, -1)">-</button>
-                        <span class="qty-val" id="qty-Pollo Ahumado">0</span>
-                        <button class="qty-btn" onclick="updateQty('Pollo Ahumado', 189, 1)">+</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="product-card" data-category="pollo">
-                <img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/pollo2.jpeg" class="product-img" alt="Pollo Enchiltepinado" onerror="this.src='https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/menu.jpeg'">
-                <div class="product-info">
-                    <div class="product-title">Pollo Enchiltepinado</div>
-                    <div class="product-desc">Pollo entero bañado en salsa picante especial de chile chiltepín.</div>
-                    <div class="product-price">$219.00</div>
-                    <div class="qty-control">
-                        <button class="qty-btn" onclick="updateQty('Pollo Enchiltepinado', 219, -1)">-</button>
-                        <span class="qty-val" id="qty-Pollo Enchiltepinado">0</span>
-                        <button class="qty-btn" onclick="updateQty('Pollo Enchiltepinado', 219, 1)">+</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="product-card" data-category="pollo">
-                <img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/pollo3.jpeg" class="product-img" alt="Pollo BBQ" onerror="this.src='https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/menu.jpeg'">
-                <div class="product-info">
-                    <div class="product-title">Pollo BBQ</div>
-                    <div class="product-desc">Pollo entero bañado en rica salsa BBQ ahumada estilo Wild West.</div>
-                    <div class="product-price">$229.00</div>
-                    <div class="qty-control">
-                        <button class="qty-btn" onclick="updateQty('Pollo BBQ', 229, -1)">-</button>
-                        <span class="qty-val" id="qty-Pollo BBQ">0</span>
-                        <button class="qty-btn" onclick="updateQty('Pollo BBQ', 229, 1)">+</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ARRACHERA -->
-            <div class="product-card" data-category="arrachera">
-                <img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/molcajete_ahumado.jpeg" class="product-img" alt="Molcajete Ahumado" onerror="this.src='https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/menu.jpeg'">
-                <div class="product-info">
-                    <div class="product-title">Molcajete Ahumado (3-4 Pers)</div>
-                    <div class="product-desc">1/2kg arrachera, 1/2kg costilla, 1/4kg chorizo, panela, nopales y 4 refrescos gratis.</div>
-                    <div class="product-price">$519.00</div>
-                    <div class="qty-control">
-                        <button class="qty-btn" onclick="updateQty('Molcajete Ahumado', 519, -1)">-</button>
-                        <span class="qty-val" id="qty-Molcajete Ahumado">0</span>
-                        <button class="qty-btn" onclick="updateQty('Molcajete Ahumado', 519, 1)">+</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="product-card" data-category="arrachera">
-                <img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/arrachera1.jpeg" class="product-img" alt="Arrachera Ahumada" onerror="this.src='https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/menu.jpeg'">
-                <div class="product-info">
-                    <div class="product-title">Arrachera Ahumada</div>
-                    <div class="product-desc">Suave y jugoso corte de arrachera ahumada a la perfección.</div>
-                    <div class="product-price">$419.00</div>
-                    <div class="qty-control">
-                        <button class="qty-btn" onclick="updateQty('Arrachera Ahumada', 419, -1)">-</button>
-                        <span class="qty-val" id="qty-Arrachera Ahumada">0</span>
-                        <button class="qty-btn" onclick="updateQty('Arrachera Ahumada', 419, 1)">+</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="product-card" data-category="arrachera">
-                <img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/arrachera2.jpeg" class="product-img" alt="Arrachera Enchiltepinada" onerror="this.src='https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/menu.jpeg'">
-                <div class="product-info">
-                    <div class="product-title">Arrachera Enchiltepinada</div>
-                    <div class="product-desc">Corte de arrachera bañado en salsa de chile chiltepín de la casa.</div>
-                    <div class="product-price">$459.00</div>
-                    <div class="qty-control">
-                        <button class="qty-btn" onclick="updateQty('Arrachera Enchiltepinada', 459, -1)">-</button>
-                        <span class="qty-val" id="qty-Arrachera Enchiltepinada">0</span>
-                        <button class="qty-btn" onclick="updateQty('Arrachera Enchiltepinada', 459, 1)">+</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="product-card" data-category="arrachera">
-                <img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/arrachera3.jpeg" class="product-img" alt="Arrachera BBQ" onerror="this.src='https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/menu.jpeg'">
-                <div class="product-info">
-                    <div class="product-title">Arrachera BBQ</div>
-                    <div class="product-desc">Arrachera preparada con nuestra salsa BBQ ahumada tradicional.</div>
-                    <div class="product-price">$469.00</div>
-                    <div class="qty-control">
-                        <button class="qty-btn" onclick="updateQty('Arrachera BBQ', 469, -1)">-</button>
-                        <span class="qty-val" id="qty-Arrachera BBQ">0</span>
-                        <button class="qty-btn" onclick="updateQty('Arrachera BBQ', 469, 1)">+</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CHORIZOS -->
-            <div class="product-card" data-category="chorizos">
-                <img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/chorizo1.jpeg" class="product-img" alt="Chorizo Ahumado" onerror="this.src='https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/menu.jpeg'">
-                <div class="product-info">
-                    <div class="product-title">Chorizo Ahumado</div>
-                    <div class="product-desc">Delicioso chorizo artesanal de la casa.</div>
-                    <div class="product-price">$219.00</div>
-                    <div class="qty-control">
-                        <button class="qty-btn" onclick="updateQty('Chorizo Ahumado', 219, -1)">-</button>
-                        <span class="qty-val" id="qty-Chorizo Ahumado">0</span>
-                        <button class="qty-btn" onclick="updateQty('Chorizo Ahumado', 219, 1)">+</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="product-card" data-category="chorizos">
-                <img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/chistorra1.jpeg" class="product-img" alt="Chistorra Ahumada" onerror="this.src='https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/menu.jpeg'">
-                <div class="product-info">
-                    <div class="product-title">Chistorra Ahumada</div>
-                    <div class="product-desc">Chistorra doradita y ahumada al gusto.</div>
-                    <div class="product-price">$269.00</div>
-                    <div class="qty-control">
-                        <button class="qty-btn" onclick="updateQty('Chistorra Ahumada', 269, -1)">-</button>
-                        <span class="qty-val" id="qty-Chistorra Ahumada">0</span>
-                        <button class="qty-btn" onclick="updateQty('Chistorra Ahumada', 269, 1)">+</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TOCINETA -->
-            <div class="product-card" data-category="tocineta">
-                <img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/tocineta1.jpeg" class="product-img" alt="Tocineta Ahumada">
-                <div class="product-info">
-                    <div class="product-title">Tocineta Ahumada</div>
-                    <div class="product-desc">Crujiente tocineta ahumada artesanal por Kg.</div>
-                    <div class="product-price">$439.00</div>
-                    <div class="qty-control">
-                        <button class="qty-btn" onclick="updateQty('Tocineta Ahumada', 439, -1)">-</button>
-                        <span class="qty-val" id="qty-Tocineta Ahumada">0</span>
-                        <button class="qty-btn" onclick="updateQty('Tocineta Ahumada', 439, 1)">+</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="product-card" data-category="tocineta">
-                <img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/tocineta2.jpeg" class="product-img" alt="Tocineta Enchiltepinada">
-                <div class="product-info">
-                    <div class="product-title">Tocineta Enchiltepinada</div>
-                    <div class="product-desc">Tocineta bañada en salsa picante especial de chile chiltepín.</div>
-                    <div class="product-price">$489.00</div>
-                    <div class="qty-control">
-                        <button class="qty-btn" onclick="updateQty('Tocineta Enchiltepinada', 489, -1)">-</button>
-                        <span class="qty-val" id="qty-Tocineta Enchiltepinada">0</span>
-                        <button class="qty-btn" onclick="updateQty('Tocineta Enchiltepinada', 489, 1)">+</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="product-card" data-category="tocineta">
-                <img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/tocineta3.jpeg" class="product-img" alt="Tocineta BBQ">
-                <div class="product-info">
-                    <div class="product-title">Tocineta BBQ</div>
-                    <div class="product-desc">Tocineta glaseada en salsa BBQ ahumada tradicional.</div>
-                    <div class="product-price">$509.00</div>
-                    <div class="qty-control">
-                        <button class="qty-btn" onclick="updateQty('Tocineta BBQ', 509, -1)">-</button>
-                        <span class="qty-val" id="qty-Tocineta BBQ">0</span>
-                        <button class="qty-btn" onclick="updateQty('Tocineta BBQ', 509, 1)">+</button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- GUARNICIONES -->
-            <div class="product-card" data-category="guarniciones">
-                <img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/arroz1.jpeg" class="product-img" alt="Arroz de la Casa" onerror="this.src='https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/menu.jpeg'">
-                <div class="product-info">
-                    <div class="product-title">Arroz de la Casa</div>
-                    <div class="product-desc">Delicioso arroz tradicional sazonado con la receta de la casa.</div>
-                    <div class="product-price">$40.00</div>
-                    <div class="qty-control">
-                        <button class="qty-btn" onclick="updateQty('Arroz de la Casa', 40, -1)">-</button>
-                        <span class="qty-val" id="qty-Arroz de la Casa">0</span>
-                        <button class="qty-btn" onclick="updateQty('Arroz de la Casa', 40, 1)">+</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="product-card" data-category="guarniciones">
-                <img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/frijoles1.jpeg" class="product-img" alt="Frijolitos Mazatecos" onerror="this.src='https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/menu.jpeg'">
-                <div class="product-info">
-                    <div class="product-title">Frijolitos Mazatecos</div>
-                    <div class="product-desc">Con trozos de costilla ahumada y chile chiltepín.</div>
-                    <div class="product-price">$50.00</div>
-                    <div class="qty-control">
-                        <button class="qty-btn" onclick="updateQty('Frijolitos Mazatecos', 50, -1)">-</button>
-                        <span class="qty-val" id="qty-Frijolitos Mazatecos">0</span>
-                        <button class="qty-btn" onclick="updateQty('Frijolitos Mazatecos', 50, 1)">+</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="product-card" data-category="guarniciones">
-                <img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/ensalada1.jpeg" class="product-img" alt="Ensalada Fresca" onerror="this.src='https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/menu.jpeg'">
-                <div class="product-info">
-                    <div class="product-title">Ensalada Fresca</div>
-                    <div class="product-desc">Jitomate, zanahoria, pepino, lechuga y aderezo especial.</div>
-                    <div class="product-price">$40.00</div>
-                    <div class="qty-control">
-                        <button class="qty-btn" onclick="updateQty('Ensalada Fresca', 40, -1)">-</button>
-                        <span class="qty-val" id="qty-Ensalada Fresca">0</span>
-                        <button class="qty-btn" onclick="updateQty('Ensalada Fresca', 40, 1)">+</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="product-card" data-category="guarniciones">
-                <img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/salsa1.jpeg" class="product-img" alt="Salsa de Cacahuate" onerror="this.src='https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/menu.jpeg'">
-                <div class="product-info">
-                    <div class="product-title">Salsa de Cacahuate</div>
-                    <div class="product-desc">Porción de 100 ml</div>
-                    <div class="product-price">$35.00</div>
-                    <div class="qty-control">
-                        <button class="qty-btn" onclick="updateQty('Salsa de Cacahuate', 35, -1)">-</button>
-                        <span class="qty-val" id="qty-Salsa de Cacahuate">0</span>
-                        <button class="qty-btn" onclick="updateQty('Salsa de Cacahuate', 35, 1)">+</button>
-                    </div>
-                </div>
-            </div>
+    <div class="carousel">
+        <div class="carousel-track" id="carouselSlide">
+            <div class="carousel-slide"><img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/menu.jpeg" alt="Banner 1"></div>
+            <div class="carousel-slide"><img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/costillas1.jpeg" alt="Banner 2"></div>
+            <div class="carousel-slide"><img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/pollo1.jpeg" alt="Banner 3"></div>
         </div>
     </div>
 
-    <!-- BARRA DEL CARRITO -->
+    <!-- BOTONES DE FILTRO DE CATEGORÍAS -->
+    <div class="categories-nav" id="categoriesNav">
+        <button class="cat-btn active" onclick="filterCategory('todos', this)">🔥 Todos</button>
+        <!-- Las categorías se cargarán de forma dinámica desde el JSON -->
+    </div>
+
+    <!-- CONTENEDOR PRINCIPAL DEL MENÚ -->
+    <div class="container">
+        <div class="menu-grid" id="menuContainer">
+            <p style="text-align:center; color: var(--text-muted); grid-column: 1/-1; padding: 20px;">Cargando menú desde el sistema... 🤠</p>
+        </div>
+    </div>
+
+    <!-- BARRA FIJA DEL CARRITO -->
     <div class="cart-bar">
         <div class="cart-info" onclick="toggleCartModal()">
             Total: <span id="cartTotal" style="color: var(--accent);">$0.00</span>
@@ -715,7 +421,7 @@
     </div>
 
     <!-- MODAL DETALLE DEL CARRITO -->
-    <div class="modal-overlay" id="cartModal">
+    <div class="modal-overlay" id="cartModal" onclick="if(event.target === this) toggleCartModal()">
         <div class="modal-content">
             <div class="modal-header">
                 <h2>🛒 Tu Pedido</h2>
@@ -730,9 +436,13 @@
         </div>
     </div>
 
-    <!-- SCRIPT -->
+    <!-- SCRIPT DE FUNCIONAMIENTO -->
     <script>
-        // Carrusel
+        const URL_JSON = "https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/precios.json";
+        let menuData = [];
+        let cart = {};
+
+        // Carrusel automático
         let slideIndex = 0;
         const slide = document.getElementById('carouselSlide');
         setInterval(() => {
@@ -740,61 +450,87 @@
             slide.style.transform = `translateX(-${slideIndex * 100}%)`;
         }, 3500);
 
-        // Filtro
-        function filterCategory(cat, btn) {
-            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            const cards = document.querySelectorAll('.product-card');
-            cards.forEach(card => {
-                if (cat === 'todos' || card.dataset.category === cat) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-const URL_JSON = "https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/precios.json";
-
-async function sincronizarPrecios() {
+        // Cargar Menú y Precios desde GitHub
+        async function cargarMenu() {
             try {
                 const respuesta = await fetch(`${URL_JSON}?t=${new Date().getTime()}`);
                 const datos = await respuesta.json();
-
-                datos.menu.forEach(cat => {
-                    cat.productos.forEach(prod => {
-                        actualizarTarjeta(prod.nombre, prod.precio);
-                    });
-                });
+                menuData = datos.menu;
+                
+                renderCategorias();
+                renderProductos('todos');
             } catch (error) {
-                console.error("Error al sincronizar precios con el JSON:", error);
+                console.error("Error al cargar el JSON:", error);
+                document.getElementById('menuContainer').innerHTML = '<p style="text-align:center; color: var(--danger); grid-column: 1/-1; padding: 20px;">Error al cargar el menú. Intenta recargar la página.</p>';
             }
         }
 
-function actualizarTarjeta(nombre, precio) {
-            // 1. Actualizar las tarjetas del menú principal
-            const titulos = document.querySelectorAll('.product-title');
-            titulos.forEach(tituloEl => {
-                if (tituloEl.textContent.trim().toLowerCase() === nombre.trim().toLowerCase()) {
-                    const card = tituloEl.closest('.product-card');
-                    if (card) {
-                        const precioEl = card.querySelector('.product-price');
-                        if (precioEl) precioEl.textContent = `$${precio.toFixed(2)}`;
+        // Generar botones de categorías dinámicamente
+        function renderCategorias() {
+            const nav = document.getElementById('categoriesNav');
+            // Mantener el botón "Todos" y agregar el resto
+            let html = `<button class="cat-btn active" onclick="filterCategory('todos', this)">🔥 Todos</button>`;
+            
+            menuData.forEach(cat => {
+                html += `<button class="cat-btn" onclick="filterCategory('${cat.categoria_id}', this)">${cat.categoria_nombre}</button>`;
+            });
+            nav.innerHTML = html;
+        }
 
-                        const botones = card.querySelectorAll('.qty-btn');
-                        if (botones.length === 2) {
-                            botones[0].setAttribute('onclick', `updateQty('${nombre}', ${precio}, -1)`);
-                            botones[1].setAttribute('onclick', `updateQty('${nombre}', ${precio}, 1)`);
-                        }
-                    }
+        // Renderizar tarjetas de productos en pantalla
+        function renderProductos(categoriaFiltro) {
+            const container = document.getElementById('menuContainer');
+            container.innerHTML = '';
+
+            let productosAMostrar = [];
+
+            if (categoriaFiltro === 'todos') {
+                menuData.forEach(cat => {
+                    cat.productos.forEach(prod => {
+                        productosAMostrar.push({ ...prod, categoria_id: cat.categoria_id });
+                    });
+                });
+            } else {
+                const catEncontrada = menuData.find(c => c.categoria_id === categoriaFiltro);
+                if (catEncontrada) {
+                    productosAMostrar = catEncontrada.productos.map(prod => ({ ...prod, categoria_id: catEncontrada.categoria_id }));
                 }
+            }
+
+            if (productosAMostrar.length === 0) {
+                container.innerHTML = '<p style="text-align:center; color: var(--text-muted); grid-column: 1/-1; padding: 20px;">No hay platillos en esta categoría.</p>';
+                return;
+            }
+
+            productosAMostrar.forEach(prod => {
+                const qtyActual = cart[prod.nombre] ? cart[prod.nombre].qty : 0;
+                
+                container.innerHTML += `
+                    <div class="product-card" data-category="${prod.categoria_id}">
+                        <img src="${prod.imagen}" class="product-img" alt="${prod.nombre}" onerror="this.src='https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/menu.jpeg'">
+                        <div class="product-info">
+                            <div class="product-title">${prod.nombre}</div>
+                            <div class="product-desc">${prod.descripcion}</div>
+                            <div class="product-price">$${Number(prod.precio).toFixed(2)}</div>
+                            <div class="qty-control">
+                                <button class="qty-btn" onclick="updateQty('${prod.nombre}', ${prod.precio}, -1)">-</button>
+                                <span class="qty-val" id="qty-${prod.nombre}">${qtyActual}</span>
+                                <button class="qty-btn" onclick="updateQty('${prod.nombre}', ${prod.precio}, 1)">+</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
             });
         }
-        window.addEventListener("DOMContentLoaded", sincronizarPrecios);
 
-        // Carrito con Cantidades
-        let cart = {};
+        // Filtrar por categoría desde los botones
+        function filterCategory(cat, btn) {
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderProductos(cat);
+        }
 
+        // Gestión del Carrito
         function updateQty(name, price, delta) {
             if (!cart[name]) {
                 cart[name] = { price: price, qty: 0 };
@@ -807,29 +543,30 @@ function actualizarTarjeta(nombre, precio) {
             }
 
             renderCart();
+            
+            // Actualizar solo el span del número si existe en pantalla actualmente
+            const spanQty = document.getElementById(`qty-${name}`);
+            if (spanQty) {
+                spanQty.textContent = cart[name] ? cart[name].qty : 0;
+            }
         }
 
         function deleteItem(name) {
             delete cart[name];
             renderCart();
+            renderProductos(document.querySelector('.cat-btn.active')?.getAttribute('onclick').match(/'([^']+)'/)[1] || 'todos');
         }
 
         function clearCart() {
             cart = {};
             renderCart();
+            renderProductos('todos');
         }
 
         function renderCart() {
             let total = 0;
             let totalCount = 0;
 
-            // Actualizar contadores en las tarjetas de productos
-            document.querySelectorAll('.qty-val').forEach(span => {
-                let name = span.id.replace('qty-', '');
-                span.textContent = cart[name] ? cart[name].qty : 0;
-            });
-
-            // Generar HTML dentro del modal
             const itemsContainer = document.getElementById('modalCartItems');
             itemsContainer.innerHTML = '';
 
@@ -860,11 +597,6 @@ function actualizarTarjeta(nombre, precio) {
                 });
             }
 
-            if (keys.length > 0) {
-                total = Object.values(cart).reduce((sum, item) => sum + (item.price * item.qty), 0);
-                totalCount = Object.values(cart).reduce((sum, item) => sum + item.qty, 0);
-            }
-
             document.getElementById('cartTotal').textContent = `$${total.toFixed(2)}`;
             document.getElementById('cartCount').textContent = totalCount;
         }
@@ -881,7 +613,7 @@ function actualizarTarjeta(nombre, precio) {
                 return;
             }
 
-            let phone = "524611461994"; // Asegúrate de tener aquí el número real de tu tío
+            let phone = "524611461994"; // Número de WhatsApp configurado
             let message = "🤠 *Nuevo Pedido - Wild West Grill*%0A%0A";
             let total = 0;
 
@@ -897,6 +629,9 @@ function actualizarTarjeta(nombre, precio) {
 
             window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
         }
+
+        // Iniciar carga al abrir la página
+        window.addEventListener("DOMContentLoaded", cargarMenu);
     </script>
 </body>
 </html>
