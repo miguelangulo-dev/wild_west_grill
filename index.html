@@ -28,31 +28,52 @@
             padding-bottom: 90px; /* Espacio para la barra fija del carrito */
         }
 
-        /* HEADER Y CARRUSEL */
+        /* HEADER Y LOGO */
         .header-container {
             text-align: center;
-            padding: 20px 10px;
+            padding: 15px 10px;
             background: #181818;
             border-bottom: 2px solid var(--accent);
+        }
+
+        .logo-img {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            margin-bottom: 5px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            background: #000;
         }
 
         .header-container h1 {
             color: var(--accent);
             font-size: 1.8rem;
-            margin-bottom: 5px;
+            margin-bottom: 2px;
         }
 
         .header-container p {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+        }
+
+        /* CARRUSEL LIMPIO (SIN TEXTOS NI PRECIOS) */
+        .carousel-wrapper {
+            padding: 15px;
+            background: #151515;
+            display: flex;
+            justify-content: center;
         }
 
         .carousel {
             width: 100%;
-            height: 200px;
+            max-width: 500px;
+            height: 250px;
             overflow: hidden;
             position: relative;
-            background: #000;
+            border-radius: 12px;
+            border: 2px solid var(--accent);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
 
         .carousel-track {
@@ -382,24 +403,27 @@
 </head>
 <body>
 
-    <!-- CABECERA Y CARRUSEL -->
+    <!-- CABECERA Y LOGO -->
     <div class="header-container">
-        <h1>Wild West Grill</h1>
-        <p>Cortes ahumados y especialidades al estilo oeste</p>
+        <img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/menu.jpeg" alt="Logo Wild West Grill" class="logo-img" onerror="this.style.display='none'">
+        <h1>WILD WEST GRILL</h1>
+        <p>SMOKED CHICKEN & RIBS</p>
     </div>
 
-    <div class="carousel">
-        <div class="carousel-track" id="carouselSlide">
-            <div class="carousel-slide"><img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/menu.jpeg" alt="Banner 1"></div>
-            <div class="carousel-slide"><img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/costillas1.jpeg" alt="Banner 2"></div>
-            <div class="carousel-slide"><img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/pollo1.jpeg" alt="Banner 3"></div>
+    <!-- CARRUSEL VISUAL LIMPIO (SIN PRECIOS) -->
+    <div class="carousel-wrapper">
+        <div class="carousel">
+            <div class="carousel-track" id="carouselSlide">
+                <div class="carousel-slide"><img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/menu.jpeg" alt="Banner 1"></div>
+                <div class="carousel-slide"><img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/costillas1.jpeg" alt="Banner 2"></div>
+                <div class="carousel-slide"><img src="https://raw.githubusercontent.com/miguelangulo-dev/wild_west_grill/main/pollo1.jpeg" alt="Banner 3"></div>
+            </div>
         </div>
     </div>
 
     <!-- BOTONES DE FILTRO DE CATEGORÍAS -->
     <div class="categories-nav" id="categoriesNav">
         <button class="cat-btn active" onclick="filterCategory('todos', this)">🔥 Todos</button>
-        <!-- Las categorías se cargarán de forma dinámica desde el JSON -->
     </div>
 
     <!-- CONTENEDOR PRINCIPAL DEL MENÚ -->
@@ -468,7 +492,6 @@
         // Generar botones de categorías dinámicamente
         function renderCategorias() {
             const nav = document.getElementById('categoriesNav');
-            // Mantener el botón "Todos" y agregar el resto
             let html = `<button class="cat-btn active" onclick="filterCategory('todos', this)">🔥 Todos</button>`;
             
             menuData.forEach(cat => {
@@ -544,7 +567,6 @@
 
             renderCart();
             
-            // Actualizar solo el span del número si existe en pantalla actualmente
             const spanQty = document.getElementById(`qty-${name}`);
             if (spanQty) {
                 spanQty.textContent = cart[name] ? cart[name].qty : 0;
@@ -613,7 +635,7 @@
                 return;
             }
 
-            let phone = "524611461994"; // Número de WhatsApp configurado
+            let phone = "524611461994";
             let message = "🤠 *Nuevo Pedido - Wild West Grill*%0A%0A";
             let total = 0;
 
